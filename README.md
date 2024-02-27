@@ -1,17 +1,21 @@
 # ESP32 S3 Alarm Clock
+I used KiCAD to design an ESP32S3 based alarm clock. It includes an IMU (LSM6DSOX), a RTC (PCF8523) and 29 WS2812-2020 LEDs for showing the time via 7 segment digits. The PCB was manufactured and assembled via JLCPB.
+
+![Render](./pics/AlarmClockProjV1.png)
+![Actual](./pics/Actual.jpg)
+
 
 ## Table of Contents
 - [Schematic](#schematic)
-
+- [Additional Notes](#additional-notes)
 
 ## Schematic
-[Full Files](./Schematic/)
-![](Schematic/Root.png)
-![](Schematic/pg2.png)
-![](Schematic/pg3.png)
-![](Schematic/pg4.png)
+[Schematic Folder](./PCB/Schematic/)
+
+The current schematic inlcudes some observations that I have made. For instance, I heard a high pitche wine from the switching regulator section, and that I could have added a switch to cut power to the whole board.
+
 
 ## Additional Notes
-[LED_Mapping.DXF](./LED_Mapping.DXF) was converted to a footprint and was used as a guide for the placement of LEDs, to follow the 7 segment display format.
+I used solidworks to design the dimensions of the 7-segment LED display, and converted it to a .dxf file format - [LED_Mapping.DXF](./LED_Mapping.DXF). This file was converted to a footprint and was used as a guide for the placement of LEDs.
 
 

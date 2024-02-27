@@ -8,6 +8,7 @@
 #include <Adafruit_GFX.h>
 #include <RTClib.h>
 #include <Adafruit_LSM6DSOX.h> 
+#include <ToneESP32.h>
 
 #define BUZZER 7
 #define NEOPIXEL_CTRL 17
@@ -19,12 +20,14 @@
 #define IMU_INT2 41
 #define RTC_INT  2
 #define SWREG_CTRL 9
+#define BUZZER_PIN 7
+#define BUZZER_CHANNEL 0
 
 #define LED_COUNT 30
 
 Adafruit_LSM6DSOX imu;
 RTC_PCF8523 rtc;
-
+ToneESP32 buzzer(BUZZER_PIN, BUZZER_CHANNEL);
 Adafruit_NeoPixel strip(LED_COUNT, NEOPIXEL_CTRL, NEO_GRB + NEO_KHZ800);
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -36,6 +39,9 @@ Adafruit_NeoPixel strip(LED_COUNT, NEOPIXEL_CTRL, NEO_GRB + NEO_KHZ800);
 void test_i2c_devices();
 void test_neopixel();
 void test_oled();
+void imu_test_print();
+void beep( int note, int duree );
+void HappyBirthday();
 
 void setup() {
   // put your setup code here, to run once:
@@ -65,14 +71,14 @@ void setup() {
   test_i2c_devices();
   test_oled();
 
-  Serial.println("Pixel Test");
   strip.begin();
   strip.clear();
   strip.setBrightness(20);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  imu_test_print();
+  HappyBirthday();
   test_neopixel();
 
 }
@@ -189,4 +195,68 @@ void i2c_addr_scan()
     Serial.println("done\n");
  
   delay(5000);           // wait 5 seconds for next scan
+}
+
+void imu_test_print()
+{
+  // put your main code here, to run repeatedly:
+  sensors_event_t accel;
+  sensors_event_t gyro;
+  sensors_event_t temp;
+  imu.getEvent(&accel, &gyro, &temp);  
+
+    /* Display the results (acceleration is measured in m/s^2) */
+  Serial.print("\t\tAccel X: ");
+  Serial.print(accel.acceleration.x);
+  Serial.print(" \tY: ");
+  Serial.print(accel.acceleration.y);
+  Serial.print(" \tZ: ");
+  Serial.print(accel.acceleration.z);
+  Serial.println(" m/s^2 ");
+
+  /* Display the results (rotation is measured in rad/s) */
+  Serial.print("\t\tGyro X: ");
+  Serial.print(gyro.gyro.x);
+  Serial.print(" \tY: ");
+  Serial.print(gyro.gyro.y);
+  Serial.print(" \tZ: ");
+  Serial.print(gyro.gyro.z);
+  Serial.println(" radians/s ");
+  Serial.println();  
+}
+
+void beep( int note, int duree ) {                   
+    buzzer.tone(note, duree);       
+    buzzer.noTone(); 
+    delay(duree*0.25);
+}
+
+void HappyBirthday() {
+  Serial.println("Starting Buzzer Test: Happy Birthday");
+  
+  beep(NOTE_G3, 200);
+  beep(NOTE_G3, 200);
+  beep(NOTE_A3, 500);
+  beep(NOTE_G3, 500);
+  beep(NOTE_C4, 500);
+  beep(NOTE_B3, 1000);
+  beep(NOTE_G3, 200);
+  beep(NOTE_G3, 200);
+  beep(NOTE_A3, 500);
+  beep(NOTE_G3, 500);
+  beep(NOTE_D4, 500);
+  beep(NOTE_C4, 1000);
+  beep(NOTE_G3, 200);
+  beep(NOTE_G3, 200);
+  beep(NOTE_G4, 500);
+  beep(NOTE_E4, 500);
+  beep(NOTE_C4, 500);
+  beep(NOTE_B3, 500);
+  beep(NOTE_A3, 750);
+  beep(NOTE_F4, 200);
+  beep(NOTE_F4, 200);
+  beep(NOTE_E4, 500);
+  beep(NOTE_C4, 500);
+  beep(NOTE_D4, 500);
+  beep(NOTE_C4, 1000); 
 }
