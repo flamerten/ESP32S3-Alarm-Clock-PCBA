@@ -12,7 +12,7 @@ I used KiCAD to design an ESP32S3 based alarm clock. It includes an IMU (LSM6DSO
 ## Schematic
 [Schematic Folder](./PCB/Schematic/)
 
-The current schematic inlcudes some observations that I have made. For instance, I heard a high pitche wine from the switching regulator section, and that I could have added a switch to cut power to the whole board.
+The current schematic inlcudes some observations that I have made. For instance, I heard a high pitched noise from the switching regulator section, and that I could have added a switch to cut power to the whole board.
 
 
 ## Additional Notes
