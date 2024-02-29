@@ -8,7 +8,7 @@
 #include <Adafruit_GFX.h>
 #include <RTClib.h>
 #include <Adafruit_LSM6DSOX.h> 
-#include <ToneESP32.h>
+#include "pitches.h"
 
 #define BUZZER 7
 #define NEOPIXEL_CTRL 17
@@ -27,7 +27,6 @@
 
 Adafruit_LSM6DSOX imu;
 RTC_PCF8523 rtc;
-ToneESP32 buzzer(BUZZER_PIN, BUZZER_CHANNEL);
 Adafruit_NeoPixel strip(LED_COUNT, NEOPIXEL_CTRL, NEO_GRB + NEO_KHZ800);
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -225,10 +224,12 @@ void imu_test_print()
   Serial.println();  
 }
 
-void beep( int note, int duree ) {                   
-    buzzer.tone(note, duree);       
-    buzzer.noTone(); 
-    delay(duree*0.25);
+void beep( int note, int noteDuration ) {
+  int pauseBetweenNotes = noteDuration * 1.30;
+  tone(BUZZER,note,noteDuration);
+  delay(pauseBetweenNotes);     
+  noTone(BUZZER);
+  delay(noteDuration*0.25);
 }
 
 void HappyBirthday() {
