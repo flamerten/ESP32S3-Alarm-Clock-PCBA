@@ -1,5 +1,5 @@
-# ESP32 S3 Alarm Clock
-I used KiCAD to design an ESP32S3 based alarm clock. It includes an IMU (LSM6DSOX), a RTC (PCF8523) and 29 WS2812-2020 LEDs for showing the time via 7 segment digits. The PCB was manufactured and assembled via JLCPB.
+# ESP32 S3 Alarm Clock PCBA
+I used KiCAD to design an ESP32S3 based alarm clock. It includes an IMU (LSM6DSOX), a RTC (PCF8523) and 29 WS2812-2020 LEDs for showing the time via 7 segment digits. The PCB was manufactured and assembled via JLCPB. This repository includes the schematic, layout and Arduino script for testing the various functions on the board. The firmware based on ESP-IDF is still in progress.
 
 ![Render](./pics/AlarmClockProjV1.png)
 ![Actual](./pics/Actual.jpg)
