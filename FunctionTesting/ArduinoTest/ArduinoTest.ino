@@ -58,16 +58,19 @@ void setup() {
   digitalWrite(15,HIGH);
   digitalWrite(16,HIGH);
 
-  //3V7 powers OLED and pixels
-  pinMode(SWREG_CTRL,OUTPUT);
-  digitalWrite(SWREG_CTRL,HIGH);
-
   Wire.begin(PCB_I2C_SDA,PCB_I2C_SCL);
   delay(1000);
 
   i2c_addr_scan();
 
   test_i2c_devices();
+
+  //3V7 powers OLED and pixels
+  pinMode(SWREG_CTRL,OUTPUT);
+  digitalWrite(SWREG_CTRL,HIGH);
+  
+  Serial.println("Try with 3V7 on");
+  i2c_addr_scan();
   test_oled();
 
   strip.begin();
